@@ -23,6 +23,11 @@ COPY package*.json ./
 RUN npm ci
 
 USER node
+
+# import env variables from secrets
 ENV NODE_ENV="production"
+ENV LOG_LEVEL="debug"
+ENV API_HOST=0.0.0.0
+ENV API_PORT=5050
 
 CMD ["npm", "start"]

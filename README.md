@@ -75,3 +75,21 @@
 - View top list of resources in use
     `kubectl top pods`
     `kubectl top pods --all-namespaces`
+- Load the image to Minikube image list
+    `minikube image load {my-name}`
+    `minikube image ls`
+- Create deployment
+    `kubectl create deployment {my-name} --image={my-image-name} --dry-run=client -o yaml > {my-name}.yaml`
+    `kubectl apply -f {my-name}.yaml`
+    `kubectl get deployments`
+    `kubectl expose deployment/{my-name} --type="NodePort" --port 80`
+    `kubectl get services`
+- Remove service
+    `kubectl delete service {my-name}`
+- Remove pod
+    `kubectl delete pods -l app={my-name}`
+- Get Minikube IP
+    `minikube ip`
+- Get service URL
+    `minikube service {my-name} --url`
+<!-- The app should be accessible over: http://<minikube_ip>:<external_port> -->

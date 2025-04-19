@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  creationTimestamp: null
+  labels:
+    app: node-server-1
+  name: node-server-1
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-server-1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: node-server-1
+    spec:
+      containers:
+      - image: node-server-1
+        name: node-server-1
+        imagePullPolicy: Never # k8s to use local image only and not trying to pull online image from docker hub
+        resources: {}
+
+status: {}
