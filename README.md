@@ -20,6 +20,8 @@
 > Minikube commands
 - Start Minikube
     `minikube start`
+- Start Minikube with hypervisor
+    `minikube start --vm-driver=hyperkit`
 - Check status
     `minikube status`
 - Stop Minikube
@@ -67,3 +69,9 @@
     `kubectl cp <pod-name>:</path/to/remote/file> </path/to/local/file>`
 - Open up a connection that forwards traffic from the local machine 8080 to remote container 80
     `kubectl port-forward <pod-name> 8080:80`
+- View Kubernetes events
+    `kubectl get events`
+    `kubectl get events --watch`
+- View top list of resources in use
+    `kubectl top pods`
+    `kubectl top pods --all-namespaces`
