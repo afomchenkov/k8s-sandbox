@@ -11,6 +11,9 @@ services:
     tty: true
     environment:
       NODE_ENV: development
+      LOG_LEVEL: debug
+      API_HOST: 0.0.0.0
+      API_PORT: 5050
     volumes:
       - ./node-server-1:/app
     networks:
