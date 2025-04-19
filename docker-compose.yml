@@ -1,0 +1,26 @@
+name: services-k8s
+
+services:
+  k8s-node-server-1:
+    image: k8s-node-server-1:dev
+    container_name: k8s-node-server-1
+    build:
+      context: node-server-1
+    ports:
+      - 5050:5050
+    tty: true
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./node-server-1:/app
+    networks:
+      - services-k8s-network
+
+networks:
+  services-k8s-network:
+    name: services-k8s-network
+    driver: bridge
+
+volumes:
+  services-k8s-data:
+    name: services-k8s-data

@@ -4,13 +4,13 @@
   "description": "",
   "type": "module",
   "scripts": {
+    "start": "node build",
+    "dev": "tsx watch src .env | pino-pretty --colorize",
+    "build": "esbuild `find src \\( -name '*.ts' \\)` --platform=node --outdir=build --resolve-extensions=.js",
+    "build:docker:prod": "docker build . -t my-fastify-app --build-arg APP_ENV=production",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "check:types": "tsc --noEmit",
-    "build": "esbuild `find src \\( -name '*.ts' \\)` --platform=node --outdir=build --resolve-extensions=.js",
-    "build:docker:prod": "docker build . -t my-fastify-app --build-arg APP_ENV=production",
-    "start": "node build",
-    "dev": "tsx watch src .env | pino-pretty --colorize",
     "pretest": "npm run build",
     "test": "vitest",
     "test:watch": "vitest -w"
