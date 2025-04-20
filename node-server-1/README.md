@@ -6,7 +6,6 @@
    `docker run --rm -p 5050:5050 node-server-1`
 
 ## Start in Minikube
-
 ```bash
 # Build the app image
 docker build -t node-server-1 .

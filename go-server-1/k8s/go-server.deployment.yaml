@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: go-server
+  labels:
+    app: go-server
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-server
+  template:
+    metadata:
+      labels:
+        app: go-server
+    spec:
+      containers: 
+      - image: go-server
+      # image: go-server:latest
+        name: go-server
+        # k8s to use local image only and not trying to pull online image from docker hub
+        imagePullPolicy: Never
+        resources: {}
+        ports:
+          - containerPort: 8181
