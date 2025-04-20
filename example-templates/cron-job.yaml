@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+
+kind: CronJob
+
+metadata:
+  name: hello-cronjob
+
+spec:
+  schedule: "*/5 * * * *"  # every 5 minutes
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          # > control how many successful/failed job histories to keep
+          # successfulJobsHistoryLimit: 3
+          # failedJobsHistoryLimit: 1
+          containers:
+          - name: hello
+            image: busybox
+            args:
+            - /bin/sh
+            - -c
+            - echo "👋 Hello from your CronJob!" && date
+          restartPolicy: OnFailure
+
+# kubectl apply -f cronjob.yaml
+# kubectl get cronjobs
+# kubectl get jobs --watch
+# kubectl logs <job-pod-name>
+
+# Usecases
+# - Database backup (mysqldump, pg_dump)
+# - Nightly email reports
+# - Log rotation or cleanup
+# - Pinging external services (e.g. uptime checks)
+# - Periodic sync with a remote server

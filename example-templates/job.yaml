@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+
+kind: Job
+
+metadata:
+  name: hello-job
+
+spec:
+  template:
+    spec:
+      containers:
+      - name: hello
+        image: busybox
+        command: ["/bin/sh", "-c"]
+        args:
+        - echo "🔧 Starting Job..." && sleep 5 && echo "✅ Job done!"
+      restartPolicy: Never
+  backoffLimit: 2
+
+# > to run a one-time task like a script, database migration, or batch job
+# Runs once and exits after printing some text.
+# restartPolicy: Never tells K8s not to restart the pod unless it fails.
+# backoffLimit: 2 means it will retry up to 2 times if it fails.
+
+# kubectl apply -f job.yaml
+# kubectl get jobs
+# kubectl get pods
+# kubectl logs <pod-name>
+# kubectl delete job hello-job
+
+# > common use cases
+# One-time script	Data migration, cleanup
+# Batch processing	Image resizing, file conversion
+# Report generation	CSV export, PDF build
+# Notify external API	Send webhook, sync tool

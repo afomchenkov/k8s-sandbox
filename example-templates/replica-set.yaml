@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+
+kind: ReplicaSet
+
+metadata:
+  name: example-replicaset
+  labels:
+    app: myapp
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:1.25
+        ports:
+        - containerPort: 80
+
+# kubectl apply -f replicaset.yaml
+# kubectl get replicaset
+# kubectl get pods -l app=myapp
+# kubectl delete replicaset example-replicaset
+
+# ReplicaSets are typically managed by Deployments, which add features like:
+#     Rolling updates
+#     Rollbacks
+#     Strategy control
+
+# Use a ReplicaSet directly only if you need fine-grained control and don't need rolling updates.

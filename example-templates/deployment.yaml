@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: my-app
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app-container
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+
+# kubectl apply -f deployment.yaml
+# kubectl get deployments             # List deployments
+# kubectl describe deployment my-app # Details of one
+# kubectl rollout status deployment my-app
+# kubectl rollout undo deployment my-app
+# kubectl delete deployment my-app
