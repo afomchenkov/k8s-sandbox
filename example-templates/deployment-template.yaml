@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: my-app                  # Name of the Deployment
+  labels:
+    app: my-app                 # Labels for selectors and service discovery
+spec:
+  replicas: 3                   # Number of desired pods
+  selector:
+    matchLabels:
+      app: my-app               # Must match pod template labels
+  template:
+    metadata:
+      labels:
+        app: my-app             # Labels assigned to the pod
+    spec:
+      containers:
+      - name: my-app-container
+        image: nginx:1.25       # Image to run
+        ports:
+        - containerPort: 80     # Port your app listens on
+        resources:
+          requests:
+            memory: "64Mi"      # Minimum memory guaranteed
+            cpu: "250m"         # Minimum CPU guaranteed
+          limits:
+            memory: "128Mi"     # Max memory
+            cpu: "500m"         # Max CPU
+        readinessProbe:         # Determines when pod is ready to receive traffic
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:          # Determines if pod is alive
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 15
+      restartPolicy: Always     # Always restart the container if it crashes
